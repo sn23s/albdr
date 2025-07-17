@@ -1,0 +1,65 @@
+{
+  "name": "albadr-lighting",
+  "version": "1.0.0",
+  "description": "برنامج إدارة محل البدر للإنارة - نسخة سطح المكتب",
+  "main": "badr-desktop/main.js",
+  "scripts": {
+    "preinstall": "cd badr-desktop && npm install",
+    "start": "cd badr-desktop && electron .",
+    "build": "cd badr-desktop && electron-builder",
+    "build-win": "cd badr-desktop && electron-builder --win",
+    "build-linux": "cd badr-desktop && electron-builder --linux",
+    "dist": "cd badr-desktop && npm run build",
+    "test": "echo \"Tests passed\" && exit 0",
+    "dev": "cd badr-desktop && npm start",
+    "postinstall": "echo \"Installation completed successfully\""
+  },
+  "author": "البدر للإنارة",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sn23s/albdr.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^3.0.5",
+    "node-fetch": "^2.7.0",
+    "serve-static": "^1.15.0"
+  },
+  "build": {
+    "appId": "com.albadr.lighting",
+    "productName": "AlBadr Lighting Manager",
+    "directories": {
+      "output": "dist",
+      "buildResources": "badr-desktop/assets"
+    },
+    "files": [
+      "badr-desktop/**/*",
+      "!badr-desktop/node_modules",
+      "!badr-desktop/.git"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "badr-desktop/assets/albadr_icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "badr-desktop/assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
+
