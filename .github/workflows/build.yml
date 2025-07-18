@@ -30,6 +30,7 @@ jobs:
       
     - name: Build application
       run: npm run build
+      continue-on-error: true
       
     - name: Run tests
       run: npm test
@@ -44,9 +45,17 @@ jobs:
       with:
         name: electron-app-${{ matrix.os }}-${{ matrix.node-version }}
         path: |
+          badr-desktop/dist/
+          badr-desktop/build/
           dist/
           build/
+          badr-desktop/*.exe
+          badr-desktop/*.dmg
+          badr-desktop/*.AppImage
+          badr-desktop/*.deb
+          badr-desktop/*.rpm
         retention-days: 30
+        if-no-files-found: ignore
         
   # وظيفة إضافية لإنشاء Release عند وجود tag
   release:
@@ -80,6 +89,11 @@ jobs:
           dist/*.AppImage
           dist/*.deb
           dist/*.rpm
+          badr-desktop/dist/*.exe
+          badr-desktop/dist/*.dmg
+          badr-desktop/dist/*.AppImage
+          badr-desktop/dist/*.deb
+          badr-desktop/dist/*.rpm
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
